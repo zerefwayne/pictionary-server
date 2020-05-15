@@ -52,6 +52,8 @@ func NewHub() *Hub {
 	hub.leaveChan = make(chan *Socket)
 
 	go hub.routerRoutine()
+	go hub.routerRoutine()
+	go hub.routerRoutine()
 	go hub.leaveRoutine()
 
 	return &hub

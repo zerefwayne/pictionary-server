@@ -75,7 +75,7 @@ func (s *Socket) writeRoutine() {
 		case <-s.QuitChan:
 			return
 		case message := <-s.WriteChan:
-			fmt.Println("writing to", s.ID, message)
+			// fmt.Println("writing to", s.ID, message)
 
 			if err := s.Conn.WriteJSON(message); err != nil {
 				log.Println("err write", s.ID, err)
@@ -97,12 +97,12 @@ func (s *Socket) readRoutine() {
 		parseMessage.Source = s.ID
 
 		if err := s.Conn.ReadJSON(&parseMessage); err != nil {
-			log.Println("err read", s.ID, err)
+			// log.Println("err read", s.ID, err)
 			s.Hub.leaveChan <- s
 			return
 		}
 
-		fmt.Printf("Read message %+v\n", parseMessage)
+		// fmt.Printf("Read message %+v\n", parseMessage)
 
 		s.Hub.routerChan <- parseMessage
 	}
